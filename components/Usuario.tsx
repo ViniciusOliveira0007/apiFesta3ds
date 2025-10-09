@@ -1,24 +1,23 @@
 import React from 'react';
 import {View, Text, FlatList, StyleSheet, TouchableOpacity} from 'react-native';
 
-interface propCliente{
+interface propUsuario{
     id: number;
     nome: string;
-    cpf: string;
-    saldo: number;
+    login: string;
     onDelete?: () => void;
     onEditar?: () => void;
 }
 
 
-export default function Cliente({id, nome, cpf, saldo, onDelete, onEditar}: propCliente) {
+export default function Cliente({id, nome, login, onDelete, onEditar}: propUsuario) {
   return (
     <View style={styles.container}>
         <View style={styles.bloco}>
             <Text style={styles.subtitulo}>Cod: {id}</Text>
             <Text style={styles.subtitulo}>Nome: {nome}</Text>
-            <Text style={styles.subtitulo}>CPF: {cpf}</Text>
-            <Text style={styles.subtitulo}>Saldo: {saldo}</Text>
+            <Text style={styles.subtitulo}>Login: {login}</Text>
+            
         </View>
 
         <View style={styles.botoes}>

@@ -6,6 +6,7 @@ import {
   useNavigation,
 } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import React from 'react';
 
 
 
@@ -31,7 +32,9 @@ export default function Home() {
 
         </TouchableOpacity>  
 
-        <TouchableOpacity style={styles.button}>  
+        <TouchableOpacity style={styles.button}
+        onPress={()=>navigation.navigate('ListaUsuario' as never)}
+        >  
           <Text style={styles.legenda}>Usuário</Text>
 
         </TouchableOpacity>  

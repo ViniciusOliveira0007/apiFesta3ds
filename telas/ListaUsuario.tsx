@@ -1,7 +1,7 @@
 import {View, FlatList, Text, StyleSheet, TouchableOpacity, Alert} from 'react-native';
 import {useState, useEffect} from 'react';
 
-import Cliente from '../components/Cliente';
+import Usuario from '../components/Usuario';
 
 import Api from '../components/Api';
 
@@ -13,24 +13,24 @@ import React from 'react';
 
 type ClienteType = { id: number; nome: string; cpf: string; saldo: number };
 
-export default function ListarClientes() {
+export default function ListarUsuarios() {
 
     const navigation = useNavigation();
 
-    const [clientes, setClientes] = useState<any>([]);
+    const [usuario, setUsuarios] = useState<any>([]);
 
     
 
 
-    async function buscaClientes(){
-     const resposta = await Api.get('clientes');
-     setClientes(resposta.data);
+    async function buscaUsuarios(){
+     const resposta = await Api.get('usuarios');
+     setUsuarios(resposta.data);
      
         
     }
 
     useEffect(() => {
-        buscaClientes();
+        buscaUsuarios();
     }, []);
     
 
@@ -42,7 +42,7 @@ export default function ListarClientes() {
                 "Excluir",`${JSON.stringify(r.data)}`
                 );
 
-                await buscaClientes();
+                await buscaUsuarios();
             } catch (e: any) {
                 Alert.alert("Erro ao excluir", e?.message ?? "Erro desconhecido");
             }
@@ -50,7 +50,7 @@ export default function ListarClientes() {
 
 
     function editar(item: ClienteType) {
-               navigation.navigate('TelaEditar' as never, {cliente : item} as never);
+               navigation.navigate('TelaEditarUser' as never, {usuario : item} as never);
       } 
     
 
@@ -65,12 +65,12 @@ export default function ListarClientes() {
     <View style={styles.container}>
        
         <TouchableOpacity style={styles.button}
-        onPress={()=>navigation.navigate('TelaCad' as never)}
+        onPress={()=>navigation.navigate('TelaUsuario' as never)}
         >  
           <Text style={styles.legenda}
-          >Cadastrar Novo Cliente</Text>
+          >Cadastrar Novo Usuário</Text>
         </TouchableOpacity>
-        <Text style={styles.titulo}>Lista de Clientes</Text>
+        <Text style={styles.titulo}>Lista de Usuários</Text>
 
         
         
@@ -79,9 +79,9 @@ export default function ListarClientes() {
             
 
 
-            data={clientes}
+            data={usuario}
                 keyExtractor={(item)=> String(item.id)}
-                renderItem={({item})=><Cliente nome={item.nome} cpf={item.cpf} saldo={item.saldo} 
+                renderItem={({item})=><Usuario nome={item.nome} login={item.login}  
                 id={item.id} onDelete={()=>excluir(item.id)} onEditar={()=>editar(item)}/>}
                 
             />
